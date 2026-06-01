@@ -38,6 +38,8 @@ There is **no catch-all filter** for instance form fields — the tag is per met
 
 Field keys are prefixed `scr_` (`SettingsFields::SCOPE_KEY`, `CLASSES_KEY`) to avoid collision with a method's own field keys.
 
+**Every injected field needs a `'default'` key — including the `type => title` section header.** When a method instance has no saved settings yet (i.e. the moment it's added in the zone editor), `WC_Shipping_Method::init_instance_settings()` runs `wp_list_pluck($form_fields, 'default')` over *all* instance form fields. Core never puts a `title` field in instance form fields, so a missing `default` there is normally never reached — but ours sits in that array. Under PHP 8 the missing key is a warning, which Acorn's `HandleExceptions` promotes to a thrown `ErrorException`, aborting the `shipping_zone_add_method` AJAX. The half-rendered modal then serializes to an empty form, so the follow-up save fails with WooCommerce's `missing_fields` error. Symptom: adding *any* method (core or third-party) freezes the UI.
+
 ## Translations
 
 - Text domain `shipping-class-restrictions`; primary translation `nl_NL`. No `load_plugin_textdomain` call — WordPress 6.5+ loads translations just-in-time because the text domain matches the slug.

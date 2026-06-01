@@ -41,6 +41,7 @@ final class SettingsFields
         $fields[self::SECTION_KEY] = [
             'title' => __('Shipping class restrictions', 'shipping-class-restrictions'),
             'type' => 'title',
+            'default' => '',
             'description' => __('Limit when this shipping method is offered, based on the shipping classes of the products in the cart. Leave it on "No restriction" to always offer the method.', 'shipping-class-restrictions'),
         ];
 
