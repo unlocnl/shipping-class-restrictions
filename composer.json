@@ -1,0 +1,14 @@
+{
+    "name": "unloc/shipping-class-restrictions",
+    "description": "Restrict WooCommerce shipping method availability by the shipping classes in the cart, per method instance and zone.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "ShippingClassRestrictions\\": "src/"
+        }
+    }
+}
